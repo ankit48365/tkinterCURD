@@ -122,11 +122,13 @@ def show():
    mycursor = mssqldb.cursor()
    mycursor.execute("SELECT STATION_NAME,LATITUDE,LONGITUDES,REMARK FROM PROJ5.SITE_TBL")
    records = mycursor.fetchall()
-#    print(records)
+   mssqldb.commit()
+   # mssqldb.close()
+   # print(records)
 
    for i, (staName, LAT, LONG, REMARK) in enumerate(records, start=1):
       listBox.insert("", "end", values=(staName, LAT, LONG, REMARK))
-    #   mssqldb.close()
+   mssqldb.close()
  
 root = Tk()
 root.geometry("800x500")
