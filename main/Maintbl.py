@@ -1,5 +1,5 @@
 
-def outer():
+def func_Main():
 
    import tkinter as tk
    from tkinter import ttk, messagebox, Tk
@@ -15,10 +15,10 @@ def outer():
 
 
    def GetValue(event):
-      e1.delete(0, Tk.END)
-      e2.delete(0, Tk.END)
-      e3.delete(0, Tk.END)
-      e4.delete(0, Tk.END)
+      e1.delete(0, tk.END)
+      e2.delete(0, tk.END)
+      e3.delete(0, tk.END)
+      e4.delete(0, tk.END)
       row_id = listBox.selection()[0]
       select = listBox.set(row_id)
       e1.insert(0,select['STATION_NAME'])
@@ -37,18 +37,18 @@ def outer():
       mycursor=mssqldb.cursor()
    
       try:
-      #    sql = "INSERT INTO  PROJ5.SITE_TBL (STATION_NAME,LATITUDE,LONGITUDES,REMARK) VALUES (?, ?, ?, ?)"
-         sql = "INSERT INTO  PROJ5.SITE_TBL (STATION_NAME,LATITUDE,LONGITUDES,REMARK) VALUES (?,?,?,?)"
+      #    sql = "INSERT INTO  [PROJ5].[MAIN_TBL] (FK_STATION_NAME, IPSEC ,ACL ,PUBLIC_PEER , TITLE, OPERATIONAL ,PEER_MATCH_FOUND) VALUES (?, ?, ?, ?)"
+         sql = "INSERT INTO  [PROJ5].[MAIN_TBL] (FK_STATION_NAME, IPSEC ,ACL ,PUBLIC_PEER , TITLE, OPERATIONAL ,PEER_MATCH_FOUND) VALUES (?,?,?,?)"
 
          val = (StaName,LAT,LONG,REMARK)
          mycursor.execute(sql, val)
          mssqldb.commit()
          #  lastid = mycursor.lastrowid
          messagebox.showinfo("information", "Employee inserted successfully...")
-         e1.delete(0, Tk.END)
-         e2.delete(0, Tk.END)
-         e3.delete(0, Tk.END)
-         e4.delete(0, Tk.END)
+         e1.delete(0, tk.END)
+         e2.delete(0, tk.END)
+         e3.delete(0, tk.END)
+         e4.delete(0, tk.END)
          e1.focus_set()
       except Exception as e:
          print(e)
@@ -65,17 +65,17 @@ def outer():
       mycursor=mssqldb.cursor()
    
       try:
-         sql = "Update  PROJ5.SITE_TBL set LATITUDE= ?,LONGITUDES= ?,REMARK= ? where STATION_NAME= ?"
+         sql = "Update  [PROJ5].[MAIN_TBL] set LATITUDE= ?,LONGITUDES= ?,REMARK= ? where STATION_NAME= ?"
          val = (LAT,LONG,REMARK,StaName)
          mycursor.execute(sql, val)
          mssqldb.commit()
          #  lastid = mycursor.lastrowid
          messagebox.showinfo("information", "Record Updateddddd successfully...")
    
-         e1.delete(0, Tk.END)
-         e2.delete(0, Tk.END)
-         e3.delete(0, Tk.END)
-         e4.delete(0, Tk.END)
+         e1.delete(0, tk.END)
+         e2.delete(0, tk.END)
+         e3.delete(0, tk.END)
+         e4.delete(0, tk.END)
          e1.focus_set()
    
       except Exception as e:
@@ -91,17 +91,17 @@ def outer():
       mycursor=mssqldb.cursor()
    
       try:
-         sql = "delete from PROJ5.SITE_TBL where STATION_NAME = ?"
+         sql = "delete from [PROJ5].[MAIN_TBL] where STATION_NAME = ?"
          val = (StaName,)
          mycursor.execute(sql, val)
          mssqldb.commit()
          #  lastid = mycursor.lastrowid
          messagebox.showinfo("information", "Record Deleteeeee successfully...")
    
-         e1.delete(0, Tk.END)
-         e2.delete(0, Tk.END)
-         e3.delete(0, Tk.END)
-         e4.delete(0, Tk.END)
+         e1.delete(0, tk.END)
+         e2.delete(0, tk.END)
+         e3.delete(0, tk.END)
+         e4.delete(0, tk.END)
          e1.focus_set()
    
       except Exception as e:
@@ -123,7 +123,7 @@ def outer():
       
       mssqldb = pyodbc.connect(connectionString)
       mycursor = mssqldb.cursor()
-      mycursor.execute("SELECT STATION_NAME,LATITUDE,LONGITUDES,REMARK FROM PROJ5.SITE_TBL")
+      mycursor.execute("SELECT FK_STATION_NAME, IPSEC ,ACL ,PUBLIC_PEER , TITLE, OPERATIONAL ,PEER_MATCH_FOUND FROM [PROJ5].[MAIN_TBL]")
       records = mycursor.fetchall()
    #    print(records)
 
@@ -160,7 +160,7 @@ def outer():
    tk.Button(root, text="Add",command = Add,height=3, width= 13).place(x=30, y=130)
    tk.Button(root, text="update",command = update,height=3, width= 13).place(x=140, y=130)
    tk.Button(root, text="Delete",command = delete,height=3, width= 13).place(x=250, y=130)
-   tk.Button(root, text="Show",command = show,height=3, width= 13).place(x=360, y=130)
+   # tk.Button(root, text="Show",command = show,height=3, width= 13).place(x=360, y=130)
 
    
    cols = ('STATION_NAME', 'LATITUDE', 'LONGITUDES','REMARK')
@@ -171,7 +171,7 @@ def outer():
       listBox.grid(row=1, column=0, columnspan=2)
       listBox.place(x=10, y=200)
    
-   # show()
+   show()
    listBox.bind('<Double-Button-1>',GetValue)
    
    root.mainloop()
