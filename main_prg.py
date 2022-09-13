@@ -3,14 +3,14 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import pyodbc
 from tkinter import *
-# from main import tkcurdpg as tkpg
+from main import tkcurdpg as tkpg
 
 # tkpg.outer()
 
 
 def STATION_MODIFY():
-    from main import tkcurdpg as tkpg
-    # tkpg.outer()
+    # from main import tkcurdpg as tkpg
+    tkpg.outer()
 
 def AGENCY_MODIFY():
     print("Agency")
