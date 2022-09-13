@@ -43,7 +43,7 @@ def Add():
        val = (StaName,LAT,LONG,REMARK)
        mycursor.execute(sql, val)
        mssqldb.commit()
-       lastid = mycursor.lastrowid
+      #  lastid = mycursor.lastrowid
        messagebox.showinfo("information", "Employee inserted successfully...")
        e1.delete(0, END)
        e2.delete(0, END)
@@ -69,7 +69,7 @@ def update():
        val = (LAT,LONG,REMARK,StaName)
        mycursor.execute(sql, val)
        mssqldb.commit()
-       lastid = mycursor.lastrowid
+      #  lastid = mycursor.lastrowid
        messagebox.showinfo("information", "Record Updateddddd successfully...")
  
        e1.delete(0, END)
@@ -95,7 +95,7 @@ def delete():
        val = (StaName,)
        mycursor.execute(sql, val)
        mssqldb.commit()
-       lastid = mycursor.lastrowid
+      #  lastid = mycursor.lastrowid
        messagebox.showinfo("information", "Record Deleteeeee successfully...")
  
        e1.delete(0, END)
@@ -138,7 +138,7 @@ global e2
 global e3
 global e4
  
-tk.Label(root, text="Location Details", fg="black", font=(None, 20)).place(x=300, y=5)
+tk.Label(root, text="Location Details", fg="black", font=(None, 20)).place(x=550, y=10)
  
 tk.Label(root, text="STATION_NAME").place(x=10, y=10)
 Label(root, text="LATITUDE").place(x=10, y=40)
@@ -160,6 +160,8 @@ e4.place(x=140, y=100)
 Button(root, text="Add",command = Add,height=3, width= 13).place(x=30, y=130)
 Button(root, text="update",command = update,height=3, width= 13).place(x=140, y=130)
 Button(root, text="Delete",command = delete,height=3, width= 13).place(x=250, y=130)
+Button(root, text="Show",command = show,height=3, width= 13).place(x=360, y=130)
+
  
 cols = ('STATION_NAME', 'LATITUDE', 'LONGITUDES','REMARK')
 listBox = ttk.Treeview(root, columns=cols, show='headings' )
@@ -169,7 +171,7 @@ for col in cols:
     listBox.grid(row=1, column=0, columnspan=2)
     listBox.place(x=10, y=200)
  
-show()
+# show()
 listBox.bind('<Double-Button-1>',GetValue)
  
 root.mainloop()
