@@ -20,8 +20,8 @@ def func_Main():
       e3.delete(0, tk.END)
       e4.delete(0, tk.END)
       e5.delete(0, tk.END)
-      e6.delete(0, tk.END)
-      e7.delete(0, tk.END)
+      # e6.delete(0, tk.END)
+      # e7.delete(0, tk.END)
       e8.delete(0, tk.END)
 
 
@@ -32,8 +32,8 @@ def func_Main():
       e3.insert(0,select['ACL'])
       e4.insert(0,select['PUBLIC_PEER'])
       e5.insert(0,select['TITLE'])
-      e6.insert(0,select['OPERATIONAL'])
-      e7.insert(0,select['PEER_MATCH_FOUND'])
+      # e6.insert(0,select['OPERATIONAL'])
+      # e7.insert(0,select['PEER_MATCH_FOUND'])
       e8.insert(0,select['PK_LINE_ID'])
 
 
@@ -45,8 +45,8 @@ def func_Main():
       ACL = e3.get()
       PUBLIC_PEER = e4.get()
       TITLE = e5.get()
-      OPERATIONAL = e6.get()
-      PEER_MATCH_FOUND = e7.get()
+      # OPERATIONAL = e6.get()
+      # PEER_MATCH_FOUND = e7.get()
       PK_LINE_ID = e8.get()
    
       mssqldb=pyodbc.connect(connectionString)
@@ -54,9 +54,9 @@ def func_Main():
    
       try:
          # sql = "INSERT INTO  [PROJ5].[MAIN_TBL] (FK_STATION_NAME, IPSEC ,ACL ,PUBLIC_PEER , TITLE, OPERATIONAL ,PEER_MATCH_FOUND) VALUES (?, ?, ?, ?)"
-         sql = "INSERT INTO  [PROJ5].[MAIN_TBL] (FK_STATION_NAME, IPSEC ,ACL ,PUBLIC_PEER , TITLE, OPERATIONAL ,PEER_MATCH_FOUND) VALUES (?,?,?,?,?,?,?)"
+         sql = "INSERT INTO  [PROJ5].[MAIN_TBL] (FK_STATION_NAME, IPSEC ,ACL ,PUBLIC_PEER , TITLE) VALUES (?,?,?,?,?)"
 
-         val = (FK_STATION_NAME, IPSEC,ACL,PUBLIC_PEER, TITLE, OPERATIONAL, PEER_MATCH_FOUND )
+         val = (FK_STATION_NAME, IPSEC,ACL,PUBLIC_PEER, TITLE )
          mycursor.execute(sql, val)
          mssqldb.commit()
          #  lastid = mycursor.lastrowid
@@ -66,8 +66,8 @@ def func_Main():
          e3.delete(0, tk.END)
          e4.delete(0, tk.END)
          e5.delete(0, tk.END)
-         e6.delete(0, tk.END)
-         e7.delete(0, tk.END)
+         # e6.delete(0, tk.END)
+         # e7.delete(0, tk.END)
          e8.delete(0, tk.END)
 
          e2.focus_set()
@@ -92,8 +92,10 @@ def func_Main():
       mycursor=mssqldb.cursor()
    
       try:
-         sql = "Update  [PROJ5].[MAIN_TBL] set IPSEC= ?,ACL= ?,PUBLIC_PEER= ?, TITLE= ? ,OPERATIONAL= ?, PEER_MATCH_FOUND= ? where PK_LINE_ID = ?"
-         val = (IPSEC,ACL,PUBLIC_PEER,TITLE, OPERATIONAL,  PEER_MATCH_FOUND)
+         # sql = "Update  [PROJ5].[MAIN_TBL] set IPSEC= ?,ACL= ?,PUBLIC_PEER= ?, TITLE= ? ,OPERATIONAL= ?, PEER_MATCH_FOUND= ? where PK_LINE_ID = ?"
+         # val = (IPSEC,ACL,PUBLIC_PEER,TITLE, OPERATIONAL,  PEER_MATCH_FOUND)
+         sql = "Update  [PROJ5].[MAIN_TBL] set IPSEC= ?,ACL= ?,PUBLIC_PEER= ?, TITLE= ?  where PK_LINE_ID = ?"
+         val = (IPSEC,ACL,PUBLIC_PEER,TITLE)
          mycursor.execute(sql, val)
          mssqldb.commit()
          #  lastid = mycursor.lastrowid
@@ -104,8 +106,8 @@ def func_Main():
          e3.delete(0, tk.END)
          e4.delete(0, tk.END)
          e5.delete(0, tk.END)
-         e6.delete(0, tk.END)
-         e7.delete(0, tk.END)
+         # e6.delete(0, tk.END)
+         # e7.delete(0, tk.END)
          e8.delete(0, tk.END)
    
          e2.focus_set()
@@ -135,10 +137,9 @@ def func_Main():
          e3.delete(0, tk.END)
          e4.delete(0, tk.END)
          e5.delete(0, tk.END)
-         e6.delete(0, tk.END)
-         e7.delete(0, tk.END)
+         # e6.delete(0, tk.END)
+         # e7.delete(0, tk.END)
          e8.delete(0, tk.END)
-
          e2.focus_set()
    
       except Exception as e:
@@ -160,35 +161,36 @@ def func_Main():
       
       mssqldb = pyodbc.connect(connectionString)
       mycursor = mssqldb.cursor()
-      mycursor.execute("SELECT FK_STATION_NAME, IPSEC ,ACL ,PUBLIC_PEER , TITLE, OPERATIONAL ,PEER_MATCH_FOUND, PK_LINE_ID FROM [PROJ5].[MAIN_TBL]")
+      mycursor.execute("SELECT FK_STATION_NAME, IPSEC ,ACL ,PUBLIC_PEER , TITLE, PK_LINE_ID FROM [PROJ5].[MAIN_TBL]")
+      # OPERATIONAL ,PEER_MATCH_FOUND, 
       records = mycursor.fetchall()
    #    print(records)
 
-      for i, (FK_STATION_NAME, IPSEC, ACL, PUBLIC_PEER, TITLE, OPERATIONAL ,PEER_MATCH_FOUND, PK_LINE_ID) in enumerate(records, start=1):
-         listBox.insert("", "end", values=(FK_STATION_NAME, IPSEC, ACL, PUBLIC_PEER, TITLE, OPERATIONAL ,PEER_MATCH_FOUND, PK_LINE_ID))
+      for i, (FK_STATION_NAME, IPSEC, ACL, PUBLIC_PEER, TITLE, PK_LINE_ID) in enumerate(records, start=1):
+         listBox.insert("", "end", values=(FK_STATION_NAME, IPSEC, ACL, PUBLIC_PEER, TITLE,  PK_LINE_ID))
       mssqldb.close()
    
    root = Tk()
-   root.geometry("1400x650")
+   root.geometry("1240x650")
    global e1
    global e2
    global e3
    global e4
    global e5
-   global e6
-   global e7
+   # global e6
+   # global e7
    global e8
 
    
-   tk.Label(root, text="Main Table Details", fg="black", font=(None, 19)).place(x=750, y=10)
+   tk.Label(root, text="Main Table Details", fg="black", font=(None, 18)).place(x=970, y=10)
    
    tk.Label(root, text="FK_STATION_NAME").place(x=10, y=10)
    tk.Label(root, text="IPSEC").place(x=10, y=40)
    tk.Label(root, text="ACL").place(x=10, y=70)
    tk.Label(root, text="PUBLIC_PEER").place(x=10, y=100)
    tk.Label(root, text="TITLE").place(x=10, y=130)
-   tk.Label(root, text="OPERATIONAL").place(x=310, y=70)
-   tk.Label(root, text="PEER_MATCH_FOUND").place(x=310, y=100)
+   # tk.Label(root, text="OPERATIONAL").place(x=310, y=70)
+   # tk.Label(root, text="PEER_MATCH_FOUND").place(x=310, y=100)
    tk.Label(root, text="PK_LINE_ID").place(x=310, y=130)
    
 
@@ -207,11 +209,11 @@ def func_Main():
    e5 = tk.Entry(root)
    e5.place(x=140, y=130)
 
-   e6 = tk.Entry(root)
-   e6.place(x=450, y=70)
+   # e6 = tk.Entry(root)
+   # e6.place(x=450, y=70)
 
-   e7 = tk.Entry(root)
-   e7.place(x=450, y=100)
+   # e7 = tk.Entry(root)
+   # e7.place(x=450, y=100)
 
    e8 = tk.Entry(root)
    e8.place(x=450, y=130)
@@ -222,7 +224,7 @@ def func_Main():
    # tk.Button(root, text="Show",command = show,height=3, width= 13).place(x=360, y=130)
 
    
-   cols = ('FK_STATION_NAME', 'IPSEC', 'ACL','PUBLIC_PEER','TITLE', 'OPERATIONAL' ,'PEER_MATCH_FOUND', 'PK_LINE_ID')
+   cols = ('FK_STATION_NAME', 'IPSEC', 'ACL','PUBLIC_PEER','TITLE', 'PK_LINE_ID')
    listBox = ttk.Treeview(root, columns=cols, show='headings' )
    
    # lb = tk.Listbox(master, font='monospace') # some monospaced font

@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import pyodbc
 from tkinter import *
-from main import station, Maintbl
+from main import A_MAIN_TBL, UD_MAIN_TBL, station
 
 # station.outer()
 
@@ -13,10 +13,11 @@ def STATION_MODIFY():
     station.func_Station()
 
 def AGENCY_MODIFY():
-    Maintbl.func_Main()
+    UD_MAIN_TBL.func_Main()
     print("Agency")
 
 def MAIN_MODIFY():
+    A_MAIN_TBL.func_Main()
     print("MAIN")
 
 
